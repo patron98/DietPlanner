@@ -1,17 +1,6 @@
 package be.intecbrussel.DietPlanner;
 
-import be.intecbrussel.DietPlanner.model.Address;
-import be.intecbrussel.DietPlanner.model.ProductMeal;
-import be.intecbrussel.DietPlanner.model.Role;
-import be.intecbrussel.DietPlanner.model.UserEntity;
-import be.intecbrussel.DietPlanner.model.request.ProductRequest;
-import be.intecbrussel.DietPlanner.model.request.UserRequest;
-import be.intecbrussel.DietPlanner.repository.RoleRepository;
-import be.intecbrussel.DietPlanner.repository.UserRepository;
-import be.intecbrussel.DietPlanner.service.database.MealDataBaseService;
-import be.intecbrussel.DietPlanner.service.products.ProductService;
-import be.intecbrussel.DietPlanner.service.user.UserService;
-import be.intecbrussel.DietPlanner.service.user.UserServiceImpl;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,12 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Collection;
-/*import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
- */
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -39,12 +23,12 @@ public class DietPlannerApplication {
 
 /*
     @Bean
-    CommandLineRunner run(UserService userService, MealDataBaseService mealDataBaseService){
+    CommandLineRunner run(UserService userService, MealDataBaseService mealDataBaseService) {
         return args -> {
             mealDataBaseService.createDatabase();
 
             userService.saveRole(new Role("ROLE_MANAGER"));
-            userService.saveRole(new Role( "ROLE_SUPER_ADMIN"));
+            userService.saveRole(new Role("ROLE_SUPER_ADMIN"));
             userService.saveRole(new Role("ROLE_ADMIN"));
             userService.saveRole(new Role("ROLE_USER"));
 
@@ -56,9 +40,13 @@ public class DietPlannerApplication {
             userService.addRoleToUser("Patron", "ROLE_SUPER_ADMIN");
             userService.addRoleToUser("axel", "ROLE_ADMIN");
             userService.addRoleToUser("Patron", "ROLE_MANAGER");
+            userService.addRoleToUser("Patron", "ROLE_USER");
         };
+    }
 
  */
+
+
 
 /*
         //mealDataBaseService.createDatabase();

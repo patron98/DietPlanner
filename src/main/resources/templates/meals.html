@@ -1,16 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Diet Planner | Home</title>
+        <title>Diet Planner</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/indexStyles.css" rel="stylesheet" />
+        <style>
+            /* CSS for the product list */
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            li {
+                margin-bottom: 10px;
+            }
+            input[type="checkbox"] {
+                margin-right: 5px;
+            }
+            .add-meal-button {
+                display: block;
+                margin-top: 20px;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -50,10 +73,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Welcome to Diet Planner!</h1>
-                    <!--div th:text="${#authentication.principal.firstname}"></div>-->
-                    <h1 class="mt-4" th:text="${userDetails.username}"></h1>
-                    <p>Set Goals, Keep Track, Improve!</p>
+                    <h2>Meal List</h2>
+                    <ul>
+                        <li th:each="meal:${meals}">
+                            <input th:text="${meal.name}" type="checkbox" id="product1" name="product1" value="Product 1"><label for="product1"></label>
+                        </li>
+                    </ul>
+                    <a href="/meals/new-meal">
+                        <button class="add-meal-button">Add New Meal</button>
+                    </a>
                 </div>
             </div>
         </div>

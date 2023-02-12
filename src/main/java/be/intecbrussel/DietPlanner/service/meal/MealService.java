@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface MealService {
 
-    void saveMeal(String name, String description, List<ProductMeal> productMeals);
+    void saveMeal(Meal meal);
 
-    void calculateCalories(Meal meal);
+    int calculateCalories(Meal meal);
 
     List<Meal> getAllMeals();
 }

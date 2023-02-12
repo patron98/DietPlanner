@@ -7,26 +7,28 @@ import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.vote.UnanimousBased;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@Configuration @RequiredArgsConstructor
+@Configuration @RequiredArgsConstructor @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,14 +38,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").authenticated()
+                .antMatchers("/login").not().authenticated()
+                .antMatchers("/{username}/dashboard").authenticated()
                 .and().formLogin()
-                .defaultSuccessUrl("/", true)
+                .successHandler((request, response, authentication) -> {
+                    String username = authentication.getName();
+                    response.sendRedirect("/" + username + "/dashboard");
+                })
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/");
-        //.formLogin().loginPage("/login")
-        //                .loginProcessingUrl("/authentication").permitAll();
+        //http.addFilterBefore(jwtAuthenticationFilter, // with this filter it will check the access JWT token and then the user and password filter
+                //UsernamePasswordAuthenticationFilter.class);
+    }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 }

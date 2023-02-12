@@ -42,13 +42,9 @@ public class ProductServiceImpl implements ProductService{
         product.setProteins(request.getProteins());
         product.setSugar(request.getSugar());
         product.setWeight(request.getWeight());
-        product.setAmount(request.getAmount());
 
-        ProductMeal productMeal = new ProductMeal();
-        productMeal.setName(product.getName());
-        productMeal.setProduct(product);
         productRepository.save(product);
-        productMealRepository.save(productMeal);
+        saveProductMeal(product.getName());
     }
 
     @Override
@@ -79,7 +75,6 @@ public class ProductServiceImpl implements ProductService{
             product.setProteins(request.getProteins());
             product.setSugar(request.getSugar());
             product.setWeight(request.getWeight());
-            product.setAmount(request.getAmount());
             return productRepository.save(product);
         }).orElseThrow(() -> new RuntimeException("product with id: " +
                 id + " not found"));
@@ -94,10 +89,24 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findProductByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("product not found"));
     }
+    @Override
+    public ProductMeal getProductMealByName(String name) {
+        if(name == null){
+            throw new IllegalArgumentException("name cannot be empty");
+        }
+        log.info("fetching product: {}", name);
+        return productMealRepository.findProductMealByName(name)
+                .orElseThrow(() -> new IllegalArgumentException("product not found"));
+    }
 
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<ProductMeal> getAllProductMeals() {
+        return productMealRepository.findAll();
     }
 
     @Override

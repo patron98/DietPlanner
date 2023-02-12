@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/api")
 public class UserController {
-/*
+
     private final UserService userService;
 
 
@@ -49,7 +49,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
- */
+
 
 
 

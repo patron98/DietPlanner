@@ -50,18 +50,15 @@ public class Product {
     @Size(max = 20)
     private double weight;
 
-    @NotEmpty
-    @Size(max = 20)
-    private int amount;
 
-    public Product(String name, int calories, float carbs, float fat, float proteins, float weight, int amount) {
+
+    public Product(String name, int calories, float carbs, float fat, float proteins, float weight) {
         this.name = name;
         this.calories = calories;
         this.carbs = carbs;
         this.fat = fat;
         this.proteins = proteins;
         this.weight = weight;
-        this.amount = amount;
     }
 
     @Override
@@ -69,12 +66,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return calories == product.calories && Double.compare(product.carbs, carbs) == 0 && Double.compare(product.fat, fat) == 0 && Double.compare(product.proteins, proteins) == 0 && Double.compare(product.sugar, sugar) == 0 && Double.compare(product.weight, weight) == 0 && amount == product.amount && Objects.equals(id, product.id) && Objects.equals(name, product.name);
+        return calories == product.calories && Double.compare(product.carbs, carbs) == 0 && Double.compare(product.fat, fat) == 0 && Double.compare(product.proteins, proteins) == 0 && Double.compare(product.sugar, sugar) == 0 && Double.compare(product.weight, weight) == 0 && Objects.equals(id, product.id) && Objects.equals(name, product.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, calories, carbs, fat, proteins, sugar, weight, amount);
+        return Objects.hash(id, name, calories, carbs, fat, proteins, sugar, weight);
     }
 
     @Override

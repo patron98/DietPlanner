@@ -3,11 +3,13 @@ package be.intecbrussel.DietPlanner.service.meal;
 import be.intecbrussel.DietPlanner.model.Meal;
 import be.intecbrussel.DietPlanner.model.ProductMeal;
 import be.intecbrussel.DietPlanner.repository.MealRepository;
+import be.intecbrussel.DietPlanner.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,30 +19,28 @@ import java.util.List;
 public class MealServiceImpl implements MealService {
 
     private final MealRepository mealRepository;
+    private final ProductRepository productRepository;
 
     @Override
-    public void saveMeal(String name, String description, List<ProductMeal> productMeals) {
-        if(name.isEmpty() || description.isEmpty() || productMeals.isEmpty()){
+    public void saveMeal(Meal meal) {
+        if (meal.getName().isEmpty() || meal.getDescription().isEmpty() || meal.getProductMeals().isEmpty()) {
             throw new IllegalArgumentException("please fill in all boxes");
         }
-        log.info("saving new meal: {} to database", name);
-        Meal newMeal = new Meal();
-        newMeal.setName(name);
-        newMeal.setDescription(description);
-        newMeal.setProductMeals(productMeals);
-        mealRepository.save(newMeal);
+        log.info("saving new meal: {} to database", meal.getName());
+        meal.setAteAt(new Date(System.currentTimeMillis()));
+        meal.setTotalCalories(calculateCalories(meal));
+        mealRepository.save(meal);
+
     }
 
     @Override
-    public void calculateCalories(Meal meal) {
+    public int calculateCalories(Meal meal) {
         if(meal == null){
             throw new IllegalArgumentException("meals cannot be empty");
         }
-        int calories = meal.getProductMeals().stream()
-                .mapToInt(productMeal -> productMeal.getProduct().getCalories())
+        return meal.getProductMeals().stream()
+                .mapToInt(productMeal -> productRepository.findProductByName(productMeal.getName()).get().getCalories())
                 .sum();
-        meal.setTotalCalories(calories);
-        mealRepository.save(meal);
     }
 
     @Override

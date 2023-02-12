@@ -35,22 +35,12 @@ public class Meal {
     private String description;
 
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-            , mappedBy = "meals")
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductMeal> productMeals;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private MealsDataBase mealsDataBase;
 
-    @NotEmpty
-    @Size(max = 20)
     private int totalCalories;
 
-    @NotNull
     private Boolean hasEaten;
 
     @Temporal(TemporalType.TIMESTAMP)

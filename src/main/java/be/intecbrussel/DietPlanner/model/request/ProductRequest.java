@@ -17,7 +17,6 @@ public class ProductRequest {
     private double proteins;
     private double sugar;
     private double weight;
-    private int amount;
 
 
 }

@@ -32,6 +32,16 @@ public class ProductMeal {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @NotEmpty
+    private int quantity;
+
+    public ProductMeal(String name, Product product, int quantity) {
+        this.name = name;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    /*
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -42,31 +52,29 @@ public class ProductMeal {
             inverseJoinColumns = { @JoinColumn(name = "meal_id") })
     private List<Meal> meals;
 
+ */
 
-
-    public ProductMeal(String name) {
-        this.name = name;
-
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductMeal that = (ProductMeal) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(product, that.product);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, product);
+        return quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(product, that.product);
     }
 
     @Override
     public String toString() {
         return "ProductMeal{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", product=" + product +
+                ", quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, product, quantity);
     }
 }

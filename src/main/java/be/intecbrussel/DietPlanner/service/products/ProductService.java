@@ -16,8 +16,11 @@ public interface ProductService {
     Product updateProduct(Long id, ProductRequest request);
 
     Product getProductByName(String name);
+    ProductMeal getProductMealByName(String name);
 
     List<Product> getAllProducts();
+
+    List<ProductMeal> getAllProductMeals();
 
     void deleteProductById(Long id);
 }
