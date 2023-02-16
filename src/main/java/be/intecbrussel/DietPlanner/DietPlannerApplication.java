@@ -1,6 +1,10 @@
 package be.intecbrussel.DietPlanner;
 
 
+import be.intecbrussel.DietPlanner.model.Role;
+import be.intecbrussel.DietPlanner.model.request.UserRequest;
+import be.intecbrussel.DietPlanner.service.database.MealDataBaseService;
+import be.intecbrussel.DietPlanner.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -43,8 +47,8 @@ public class DietPlannerApplication {
             userService.addRoleToUser("Patron", "ROLE_USER");
         };
     }
-
  */
+
 
 
 

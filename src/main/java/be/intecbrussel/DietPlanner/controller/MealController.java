@@ -2,6 +2,7 @@ package be.intecbrussel.DietPlanner.controller;
 
 import be.intecbrussel.DietPlanner.model.Meal;
 import be.intecbrussel.DietPlanner.model.ProductMeal;
+import be.intecbrussel.DietPlanner.service.database.MealDataBaseService;
 import be.intecbrussel.DietPlanner.service.meal.MealService;
 import be.intecbrussel.DietPlanner.service.products.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.List;
 public class MealController {
     private final MealService mealService;
     private final ProductService productService;
+    private final MealDataBaseService mealDataBaseService;
 
     @GetMapping("/meals")
     public String getMeals(HttpServletRequest request) {
@@ -39,7 +41,7 @@ public class MealController {
     public String getMealsLoggedIn(@PathVariable String username, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken) && authentication.getName().equals(username)) {
-            model.addAttribute("meals", mealService.getAllMeals());
+            model.addAttribute("databaseMeals", mealDataBaseService.getAllDatabaseMeals());
             return "meals";
         }
         return "index";
@@ -70,6 +72,11 @@ public class MealController {
         model.addAttribute("meal", new Meal());
         mealService.saveMeal(meal);
         return "redirect:/meals";
+
+    }
+
+    @PostMapping("/{username}/meals")
+    public String addMealToUser(@PathVariable String username, Model model){
 
     }
 

@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -24,5 +26,10 @@ public class MealDatabaseServiceImpl implements MealDataBaseService{
     @Override
     public void deleteDatabase() {
 
+    }
+
+    @Override
+    public List<MealsDataBase> getAllDatabaseMeals(){
+        return mealDatabaseRepository.findAll();
     }
 }

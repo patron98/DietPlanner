@@ -54,9 +54,8 @@ public class UserEntity implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "meals_database_id", nullable = true)
-    private Long mealsDataBaseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MealsDataBase mealsDataBase;
 
     public UserEntity(String name, String username, String email, String password, Address address, Collection<Role> roles) {
         this.name = name;

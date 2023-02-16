@@ -42,17 +42,12 @@ public class ProductMeal {
     }
 
     /*
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "meal_products",
-            joinColumns = { @JoinColumn(name = "product_meal_id") },
-            inverseJoinColumns = { @JoinColumn(name = "meal_id") })
-    private List<Meal> meals;
+    @ManyToOne
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
 
- */
+     */
+
 
 
     @Override

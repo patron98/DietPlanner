@@ -85,7 +85,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <div class="profile">
                         <p th:text="${user.username}"></p>
                         <p th:text="${user.email}"></p>
-                        <div class="address">
+                        <div th:if="${user.address} != null" class="address">
                             <h2>Address</h2>
                             <p th:text="${user.address.addressLine2} + ', ' + ${user.address.addressLine1}"></p>
                             <p th:text="${user.address.city} + ', ' + ${user.address.state}"></p>

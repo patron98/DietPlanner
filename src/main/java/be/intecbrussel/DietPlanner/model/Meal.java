@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -38,14 +39,16 @@ public class Meal {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductMeal> productMeals;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<UserEntity> users = new ArrayList<>();
+
 
     private int totalCalories;
 
     private Boolean hasEaten;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "ate_at", nullable = false, updatable = false)
-    @CreatedDate
+    @Column(name = "ate_at")
     private Date ateAt;
 
     public Meal(String name, String description, List<ProductMeal> productMeals, int totalCalories, Boolean hasEaten, Date ateAt) {
