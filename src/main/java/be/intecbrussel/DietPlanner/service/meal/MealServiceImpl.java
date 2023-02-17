@@ -12,6 +12,7 @@ import be.intecbrussel.DietPlanner.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,9 +38,9 @@ public class MealServiceImpl implements MealService {
             log.error("exception thrown in saveMeal");
             throw new IllegalArgumentException("please fill in all boxes");
         }
-        //meal.setAteAt(new Date(System.currentTimeMillis()));
         MealsDataBase addMealToDatabase = mealDatabaseRepository.findById(1L).orElseThrow(() -> new NullPointerException("no database found"));
         log.info("saving new meal: {} to database", meal.getName());
+        meal.setAteAt(new Date(System.currentTimeMillis()));
         meal.setTotalCalories(calculateCalories(meal));
         mealRepository.save(meal);
         addMealToDatabase.getMeals().add(meal);
@@ -47,6 +48,7 @@ public class MealServiceImpl implements MealService {
 
     }
 
+    @Override
     public void addMealToUser(String username, Long mealId){
         if(username.isEmpty() || mealId == null){
             throw new NullPointerException("arguments cannot be empty");
@@ -55,6 +57,20 @@ public class MealServiceImpl implements MealService {
         Meal meal = mealRepository.findById(mealId).orElseThrow(() -> new NullPointerException("Meal not found"));
         log.info("saving new meal: {} to user: {}", meal.getName(), username);
         meal.getUsers().add(user);
+    }
+
+    @Override
+    public List<Meal> getAllMealsFromUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Long userId = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found")) .getId();
+        return mealRepository.findMealsByUsers_Id(userId);
+    }
+
+    @Override
+    public int calculateCaloriesFromAllMeals(List<Meal> meals){
+        return meals.stream()
+                .mapToInt(Meal::getTotalCalories)
+                .sum();
     }
 
     @Override

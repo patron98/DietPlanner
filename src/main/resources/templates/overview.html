@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Diet Planner | Home</title>
+    <title>Diet Planner</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/indexStyles.css" rel="stylesheet"/>
-    <link href="/css/dashboard.css" rel="stylesheet"/>
+    <link href="/css/overview.css" rel="stylesheet"/>
+
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -54,34 +55,31 @@
             </div>
         </nav>
         <!-- Page content-->
-        <div class="dash-news">
-            <div class="dashboard-content">
-                <div>
-                    <h1 class="mt-4">Welcome to Diet Planner!</h1>
-                    <h1 class="mt-4" th:text="${userDetails.username}"></h1>
-                    <p>Set Goals, Keep Track, Improve!</p>
-                </div>
-
-                <div class="dashboard-container">
-                    <section class="advert">
-                        <h2>Advertisements</h2>
-                        <p>Here is the section for advertisements.</p>
-                    </section>
-                </div>
-
-                <span class=href="/logout">
-                    <button class="logout">Logout</button>
-                </span>
-            </div>
-
+        <div class="container-fluid">
             <div>
-                <section class="news">
-                    <h2>News</h2>
-                    <iframe src="https://www.nytimes.com/"></iframe>
-                </section>
+                <h1>Meal Overview</h1>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Ckal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="meal : ${meals}">
+                        <td th:text="${meal.name}"></td>
+                        <td th:text="${meal.description}"></td>
+                        <td th:text="${meal.totalCalories}"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Total CKal:</b></td>
+                        <td class="total-calories" th:text="${totalCalories}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
 </div>
 <!-- Bootstrap core JS-->

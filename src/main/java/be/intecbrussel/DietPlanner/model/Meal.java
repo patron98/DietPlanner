@@ -39,7 +39,7 @@ public class Meal {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductMeal> productMeals;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private List<UserEntity> users = new ArrayList<>();
 
 
@@ -48,7 +48,7 @@ public class Meal {
     private Boolean hasEaten;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "ate_at")
+    @Column(name = "ate_at", nullable = true)
     private Date ateAt;
 
     public Meal(String name, String description, List<ProductMeal> productMeals, int totalCalories, Boolean hasEaten, Date ateAt) {

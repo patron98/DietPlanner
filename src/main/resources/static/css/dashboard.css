@@ -1,0 +1,43 @@
+.dash-news {
+    display: flex;
+    flex-direction: row;
+}
+.dashboard-content {
+    width: 40%;
+    padding: 20px;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.news {
+
+    height: 100%;
+    margin-left: auto;
+}
+
+.news iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.advert h2 {
+    color: #369;
+}
+
+.news h2 {
+    color: #369;
+}
+
+.logout {
+    background-color: #369;
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px;
+    padding: 10px 20px;
+}

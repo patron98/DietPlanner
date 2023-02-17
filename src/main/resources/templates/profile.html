@@ -1,104 +1,118 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Diet Planner | Home</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/css/indexStyles.css" rel="stylesheet" />
-        <style>
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Diet Planner | Home</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/indexStyles.css" rel="stylesheet"/>
+    <link href="/css/profile.css" rel="stylesheet"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-            .profile {
-                border: 1px solid #ccc;
-                border-radius: 0.5rem;
-                padding: 1rem;
-                max-width: 800px;
-                width: 100%;
-            }
-
-            .profile p {
-                margin: 0.5rem 0;
-                font-size: 1.2rem;
-            }
-
-            .address h2 {
-                margin-top: 1.5rem;
-                font-size: 1.5rem;
-            }
-
-            .address p {
-                margin: 0.5rem 0;
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-
-            .address p:not(:last-child) {
-                margin-bottom: 1rem;
-            }
-
-        </style>
-    </head>
-    <body>
-        <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Diet Planner</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/dashboard">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/overview">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/meals">Meals</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/products">Products</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/goals">Goals</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/profile">Profile</a>
+</head>
+<body>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">Diet Planner</div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/dashboard">Dashboard</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/overview">Overview</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/meals">Meals</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/products">Products</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/goals">Goals</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/profile">Profile</a>
+        </div>
+    </div>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                        <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/address">Address</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
-                <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/address">Address</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="/logout">Logout</a>
+        </nav>
+        <!-- Page content-->
+        <div class="container-fluid">
+            <div class="container emp-profile">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                     aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Username</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p th:text="${user.username}"></p>
+                                        </div>
                                     </div>
-                                </li>
-                            </ul>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p th:text="${user.name}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p th:text="${user.email}"></p>
+                                        </div>
+                                    </div>
+                                    <div th:if="${user.address} != null" class="row">
+                                        <div class="col-md-6">
+                                            <label>Address</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p th:text="${user.address.addressLine2} + ', ' + ${user.address.addressLine1}"></p>
+                                            <p th:text="${user.address.city} + ', ' + ${user.address.state}"></p>
+                                            <p th:text="${user.address.zipCode} + ' ' + ${user.address.country}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </nav>
-                <!-- Page content-->
-                <div class="container-fluid">
-                    <h1>User Profile</h1>
-                    <div class="profile">
-                        <p th:text="${user.username}"></p>
-                        <p th:text="${user.email}"></p>
-                        <div th:if="${user.address} != null" class="address">
-                            <h2>Address</h2>
-                            <p th:text="${user.address.addressLine2} + ', ' + ${user.address.addressLine1}"></p>
-                            <p th:text="${user.address.city} + ', ' + ${user.address.state}"></p>
-                            <p th:text="${user.address.country} + ' ' + ${user.address.zipCode}"></p>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="/js/scripts.js"></script>
-        <script src="/js/address_scripts.js"></script>
-    </body>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
+<script src="/js/address_scripts.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
 </html>

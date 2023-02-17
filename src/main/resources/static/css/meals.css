@@ -1,0 +1,54 @@
+/* Blue color scheme */
+:root {
+    --primary-color: #00bfff;
+    --secondary-color: #f2f2f2;
+}
+
+/* Basic table styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+
+/* Button styles */
+button.add-meal-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button.add-meal-button:hover {
+    background-color: #0080ff;
+}
+
+/* Form styles */
+form {
+    display: inline-block;
+}
+
+/* Headline styles */
+h1 {
+    color: var(--primary-color);
+}

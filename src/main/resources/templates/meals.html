@@ -10,33 +10,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/indexStyles.css" rel="stylesheet"/>
-    <style>
-        /* CSS for the product list */
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        .add-meal-button {
-            display: block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <link href="/css/meals.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -80,6 +54,8 @@
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
+
+            <!--
             <h2>Meal List</h2>
             <ul>
                 <li th:each="meal:${databaseMeals}">
@@ -92,6 +68,38 @@
             <a href="/meals/new-meal">
                 <button class="add-meal-button">Add New Meal</button>
             </a>
+            -->
+            <div>
+                <h1>Meals</h1>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Calories</th>
+                        <th>Add to Eaten Meals</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="meals:${databaseMeals}">
+                    <tr th:each="meal:${meals.meals}">
+                        <td th:text="${meal.name}"></td>
+                        <td th:text="${meal.description}"></td>
+                        <td th:text="${meal.totalCalories}"></td>
+                        <td>
+                            <form th:action="@{/__${#httpServletRequest.remoteUser}__/meals}" method="post">
+                                <input type="hidden" name="mealId" th:value="${meal.id}">
+                                <button type="submit">Add to Eaten Meals</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="/meals/new-meal">
+                    <button class="add-meal-button">Add New Meal</button>
+                </a>
+            </div>
+
         </div>
     </div>
 </div>

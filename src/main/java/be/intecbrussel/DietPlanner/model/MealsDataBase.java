@@ -22,10 +22,8 @@ public class MealsDataBase {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "meals_Database")
+    @OneToMany
     private List<Meal> meals;
-
-
 
 
 }

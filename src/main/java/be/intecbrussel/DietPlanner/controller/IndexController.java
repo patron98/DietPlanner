@@ -150,4 +150,30 @@ public class IndexController {
 
         return "index";
     }
+
+    @GetMapping("/overview")
+    public String getOverview(HttpServletRequest request){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/" + request.getUserPrincipal().getName() + "/overview";
+        }
+
+        return "index";
+    }
+
+    @GetMapping("/{username}/overview")
+    public String getLoggedInOverview(@PathVariable String username, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        if (!(authentication instanceof AnonymousAuthenticationToken)&& authentication.getName().equals(username)) {
+            model.addAttribute("meals", mealService.getAllMealsFromUser());
+            model.addAttribute("totalCalories", mealService.calculateCaloriesFromAllMeals(mealService.getAllMealsFromUser()));
+            return "overview";
+        }
+
+        // if it is not authenticated, then go to the index...
+        // other things ...
+        return "index";
+    }
 }
