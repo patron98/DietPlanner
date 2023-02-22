@@ -1,38 +1,102 @@
-.form-and-list {
-    display: flex;
-    flex-wrap: wrap;
+/* Blue color scheme */
+:root {
+    --primary-color: #00bfff;
+    --secondary-color: #f2f2f2;
 }
 
-.form-container {
-    margin-right: 20px;
+/* Basic table styles */
+table {
+    border-collapse: collapse;
+    width: 75%;
+    table-layout: fixed;
+    margin-top: 20px;
+}
+
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.sticky-header {
+    position: sticky;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    position: sticky;
+}
+
+tr:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+
+.form-and-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Button styles */
+button.add-product-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 115px;
+}
+
+button.add-product-button:hover {
+    background-color: #0080ff;
+}
+
+/* Form styles */
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.form-control {
-    width: 150px;
-    max-width: 100%;
+.form-group label {
+    margin-right: 10px;
+    width: 100px;
+    text-align: right;
 }
 
-.product-list {
-    max-height: 300px;
-    overflow-y: auto;
-    margin: 0;
-    padding: 0;
+.form-group input {
+    flex: 1;
+    width: 100%;
+    max-width: 300px;
 }
 
-.product {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    list-style: none;
+/* Headline styles */
+h1, h2 {
+    color: var(--primary-color);
 }
 
-.product-name {
-    margin: 0;
-    font-weight: bold;
-    font-size: 18px;
+/* Product list styles */
+.product-list-div {
+
+    width: 50%;
+
+    margin-right: 50px;
+}
+
+.list{
+    overflow-y: scroll;
+    height:400px;
 }

@@ -42,9 +42,10 @@ public class MealServiceImpl implements MealService {
         log.info("saving new meal: {} to database", meal.getName());
         meal.setAteAt(new Date(System.currentTimeMillis()));
         meal.setTotalCalories(calculateCalories(meal));
+        meal.setMealsDataBase(addMealToDatabase);
         mealRepository.save(meal);
-        addMealToDatabase.getMeals().add(meal);
-        mealDatabaseRepository.save(addMealToDatabase);
+        //addMealToDatabase.getMeals().add(meal);
+        //mealDatabaseRepository.save(addMealToDatabase);
 
     }
 

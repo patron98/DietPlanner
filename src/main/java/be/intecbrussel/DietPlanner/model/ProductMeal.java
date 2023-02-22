@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,12 +42,15 @@ public class ProductMeal {
         this.quantity = quantity;
     }
 
-    /*
-    @ManyToOne
-    @JoinColumn(name = "meal_id")
-    private Meal meal;
-
-     */
+    @ManyToMany(fetch = FetchType.LAZY,
+    cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "meals_with_products",
+            joinColumns = { @JoinColumn(name = "productMeal_id") },
+            inverseJoinColumns = { @JoinColumn(name = "meal_id") })
+    private List<Meal> meals = new ArrayList<>();
 
 
 

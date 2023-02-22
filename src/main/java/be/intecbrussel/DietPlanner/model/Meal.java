@@ -36,9 +36,15 @@ public class Meal {
     private String description;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+    mappedBy = "meals")
     private List<ProductMeal> productMeals;
 
+    //this is wrong
     @OneToMany
     private List<UserEntity> users = new ArrayList<>();
 
@@ -50,6 +56,10 @@ public class Meal {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "ate_at", nullable = true)
     private Date ateAt;
+
+    @ManyToOne
+    @JoinColumn(name = "meals_data_base_id")
+    private MealsDataBase mealsDataBase;
 
     public Meal(String name, String description, List<ProductMeal> productMeals, int totalCalories, Boolean hasEaten, Date ateAt) {
         this.name = name;

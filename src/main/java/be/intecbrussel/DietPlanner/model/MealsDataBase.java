@@ -22,7 +22,7 @@ public class MealsDataBase {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "mealsDataBase")
     private List<Meal> meals;
 
 

@@ -10,6 +10,8 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/indexStyles.css" rel="stylesheet"/>
+    <link href="/css/createMeal.css" rel="stylesheet"/>
+
 </head>
 <body>
 <div class="d-flex" id="wrapper">
@@ -21,7 +23,6 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/overview">Overview</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/meals">Meals</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/products">Products</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/goals">Goals</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/profile">Profile</a>
         </div>
     </div>
@@ -58,27 +59,37 @@
                     <div class="card">
                         <div class="card-body">
                             <form th:action="@{/meals/new-meal}" th:object="${meal}" method="post">
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name" th:field="*{name}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description:</label>
-                                    <input type="text" class="form-control" id="description" name="description" th:field="*{description}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Products:</label>
-                                    <div th:each="product : ${products}">
-                                        <div class="form-check">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input" th:value="${product.id}"
-                                                       name="productMeals" th:id="'product-' + ${product.id}"/>
-                                            </label>
-                                            <label class="form-check-label" th:for="'product-' + ${product.id}" th:text="${product.name}"></label>
+                                <div class="form">
+                                    <div class="input-name-description">
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                   th:field="*{name}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <input type="text" class="form-control" id="description" name="description"
+                                                   th:field="*{description}"/>
                                         </div>
                                     </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label>Products:</label>
+                                            <div class="product-list" th:each="product : ${products}">
+                                                <div class="form-check">
+                                                    <label>
+                                                        <input type="checkbox" class="form-check-input"
+                                                               th:value="${product.id}"
+                                                               name="productMeals" th:id="'product-' + ${product.id}"/>
+                                                    </label>
+                                                    <label class="form-check-label" th:for="'product-' + ${product.id}"
+                                                           th:text="${product.name}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create Meal</button>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Create Meal</button>
                             </form>
                         </div>
                     </div>
